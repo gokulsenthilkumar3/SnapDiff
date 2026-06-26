@@ -1,0 +1,140 @@
+{
+  "projects": [
+    {
+      "id": "9c55526b-3120-4590-b9a4-6464215c3f5e",
+      "created_at": "2026-06-26T20:13:12.162Z",
+      "updated_at": "2026-06-26T20:13:12.162Z",
+      "name": "Demo Project",
+      "github_repo": "demo/project",
+      "vercel_project_id": null,
+      "owner_id": "demo-user-001"
+    }
+  ],
+  "baselines": [
+    {
+      "id": "c45294a2-bae1-4d3d-8b68-a71530425c52",
+      "created_at": "2026-06-26T20:26:46.936Z",
+      "updated_at": "2026-06-26T20:27:25.851Z",
+      "project_id": "9c55526b-3120-4590-b9a4-6464215c3f5e",
+      "url": "/",
+      "screenshot_url": "http://localhost:3001/uploads/snapshots/9c55526b-3120-4590-b9a4-6464215c3f5e/9a5bcccf-4709-45b3-a289-a1514d3da0ae/b48ed730-d5b6-453f-84d2-37385061bcae/screenshot.png",
+      "approved_at": "2026-06-26T20:27:25.850Z",
+      "approved_by": "demo-user-001"
+    }
+  ],
+  "runs": [
+    {
+      "id": "91494d8d-07db-41ea-aca1-783d4d735830",
+      "created_at": "2026-06-26T20:21:22.533Z",
+      "updated_at": "2026-06-26T20:21:24.200Z",
+      "project_id": "9c55526b-3120-4590-b9a4-6464215c3f5e",
+      "commit_sha": null,
+      "deployment_url": "https://localhost:3000",
+      "status": "failed",
+      "pr_number": null,
+      "github_repo": "demo/project"
+    },
+    {
+      "id": "95b243dc-7e04-4a28-9678-bd2ba826c935",
+      "created_at": "2026-06-26T20:22:46.475Z",
+      "updated_at": "2026-06-26T20:22:46.980Z",
+      "project_id": "9c55526b-3120-4590-b9a4-6464215c3f5e",
+      "commit_sha": null,
+      "deployment_url": "https://localhost:3000",
+      "status": "failed",
+      "pr_number": null,
+      "github_repo": "demo/project"
+    },
+    {
+      "id": "d46ba252-5f7c-4921-9a30-9eecdbe61968",
+      "created_at": "2026-06-26T20:25:05.995Z",
+      "updated_at": "2026-06-26T20:25:06.516Z",
+      "project_id": "9c55526b-3120-4590-b9a4-6464215c3f5e",
+      "commit_sha": null,
+      "deployment_url": "https://127.0.0.1:3000",
+      "status": "failed",
+      "pr_number": null,
+      "github_repo": "demo/project"
+    },
+    {
+      "id": "9a5bcccf-4709-45b3-a289-a1514d3da0ae",
+      "created_at": "2026-06-26T20:26:42.201Z",
+      "updated_at": "2026-06-26T20:26:47.141Z",
+      "project_id": "9c55526b-3120-4590-b9a4-6464215c3f5e",
+      "commit_sha": null,
+      "deployment_url": "http://localhost:3000",
+      "status": "passed",
+      "pr_number": null,
+      "github_repo": "demo/project"
+    },
+    {
+      "id": "ce549973-7ff1-4664-91d9-324307f5fc74",
+      "created_at": "2026-06-26T20:29:49.650Z",
+      "updated_at": "2026-06-26T20:29:53.777Z",
+      "project_id": "9c55526b-3120-4590-b9a4-6464215c3f5e",
+      "commit_sha": null,
+      "deployment_url": "http://localhost:3000",
+      "status": "passed",
+      "pr_number": null,
+      "github_repo": "demo/project"
+    }
+  ],
+  "snapshots": [
+    {
+      "id": "20114eaa-d07f-491a-bf22-fc4329300bb0",
+      "created_at": "2026-06-26T20:21:23.579Z",
+      "updated_at": "2026-06-26T20:21:24.001Z",
+      "run_id": "91494d8d-07db-41ea-aca1-783d4d735830",
+      "project_id": "9c55526b-3120-4590-b9a4-6464215c3f5e",
+      "url": "/",
+      "deployment_url": "https://localhost:3000",
+      "status": "failed"
+    },
+    {
+      "id": "e2a8a8cd-51cb-4202-99dd-31757d35e851",
+      "created_at": "2026-06-26T20:22:46.679Z",
+      "updated_at": "2026-06-26T20:22:46.830Z",
+      "run_id": "95b243dc-7e04-4a28-9678-bd2ba826c935",
+      "project_id": "9c55526b-3120-4590-b9a4-6464215c3f5e",
+      "url": "/",
+      "deployment_url": "https://localhost:3000",
+      "status": "failed"
+    },
+    {
+      "id": "dc4c2329-7ad7-4658-8df8-57c05d9d2566",
+      "created_at": "2026-06-26T20:25:06.194Z",
+      "updated_at": "2026-06-26T20:25:06.341Z",
+      "run_id": "d46ba252-5f7c-4921-9a30-9eecdbe61968",
+      "project_id": "9c55526b-3120-4590-b9a4-6464215c3f5e",
+      "url": "/",
+      "deployment_url": "https://127.0.0.1:3000",
+      "status": "failed"
+    },
+    {
+      "id": "b48ed730-d5b6-453f-84d2-37385061bcae",
+      "created_at": "2026-06-26T20:26:42.409Z",
+      "updated_at": "2026-06-26T20:27:25.853Z",
+      "run_id": "9a5bcccf-4709-45b3-a289-a1514d3da0ae",
+      "project_id": "9c55526b-3120-4590-b9a4-6464215c3f5e",
+      "url": "/",
+      "deployment_url": "http://localhost:3000",
+      "status": "passed",
+      "screenshot_url": "http://localhost:3001/uploads/snapshots/9c55526b-3120-4590-b9a4-6464215c3f5e/9a5bcccf-4709-45b3-a289-a1514d3da0ae/b48ed730-d5b6-453f-84d2-37385061bcae/screenshot.png",
+      "baseline_url": "http://localhost:3001/uploads/snapshots/9c55526b-3120-4590-b9a4-6464215c3f5e/9a5bcccf-4709-45b3-a289-a1514d3da0ae/b48ed730-d5b6-453f-84d2-37385061bcae/screenshot.png"
+    },
+    {
+      "id": "3ec80223-6b55-4a41-8071-e156333cb41f",
+      "created_at": "2026-06-26T20:29:49.956Z",
+      "updated_at": "2026-06-26T20:29:53.508Z",
+      "run_id": "ce549973-7ff1-4664-91d9-324307f5fc74",
+      "project_id": "9c55526b-3120-4590-b9a4-6464215c3f5e",
+      "url": "/",
+      "deployment_url": "http://localhost:3000",
+      "status": "passed",
+      "screenshot_url": "http://localhost:3001/uploads/snapshots/9c55526b-3120-4590-b9a4-6464215c3f5e/ce549973-7ff1-4664-91d9-324307f5fc74/3ec80223-6b55-4a41-8071-e156333cb41f/screenshot.png",
+      "baseline_url": "http://localhost:3001/uploads/snapshots/9c55526b-3120-4590-b9a4-6464215c3f5e/9a5bcccf-4709-45b3-a289-a1514d3da0ae/b48ed730-d5b6-453f-84d2-37385061bcae/screenshot.png",
+      "diff_url": "http://localhost:3001/uploads/diffs/9c55526b-3120-4590-b9a4-6464215c3f5e/ce549973-7ff1-4664-91d9-324307f5fc74/3ec80223-6b55-4a41-8071-e156333cb41f/diff.png",
+      "diff_percent": 0
+    }
+  ]
+}

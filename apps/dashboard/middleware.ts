@@ -1,7 +1,22 @@
 import { createServerClient, type CookieOptions } from '@supabase/ssr';
 import { type NextRequest, NextResponse } from 'next/server';
+import { isLocalMode, LOCAL_SESSION_COOKIE } from '@/lib/mode';
 
 export async function middleware(request: NextRequest) {
+  // ── Local demo mode ────────────────────────────────────────────
+  if (isLocalMode()) {
+    const session = request.cookies.get(LOCAL_SESSION_COOKIE);
+    const protectedPaths = ['/dashboard', '/projects'];
+    const isProtected = protectedPaths.some((p) => request.nextUrl.pathname.startsWith(p));
+    if (!session && isProtected) {
+      const url = request.nextUrl.clone();
+      url.pathname = '/login';
+      return NextResponse.redirect(url);
+    }
+    return NextResponse.next({ request });
+  }
+
+  // ── Real Supabase mode ─────────────────────────────────────────
   let supabaseResponse = NextResponse.next({ request });
 
   const supabase = createServerClient(

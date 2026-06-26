@@ -50,10 +50,10 @@ export default async function DashboardPage() {
         .limit(50)
     : { data: [] };
 
-  const latestRunByProject = (latestRuns ?? []).reduce<Record<string, Run>>((acc, run: Run) => {
+  const latestRunByProject = ((latestRuns as Run[]) ?? []).reduce((acc: Record<string, Run>, run: Run) => {
     if (!acc[run.project_id]) acc[run.project_id] = run;
     return acc;
-  }, {});
+  }, {} as Record<string, Run>);
 
   return (
     <div className="min-h-screen">

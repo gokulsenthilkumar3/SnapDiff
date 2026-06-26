@@ -3,7 +3,10 @@ import express, { type Request, type Response } from 'express';
 import crypto from 'crypto';
 import { screenshotQueue } from './queues/screenshotQueue';
 import { startScreenshotWorker } from './workers/screenshotWorker';
-import { supabase } from './lib/supabase';
+import { supabase as cloudSupabase } from './lib/supabase';
+import { isLocalMode } from './lib/localMode';
+import { localDb } from './lib/localDb';
+import { getUploadsDir } from './lib/localStorage';
 
 const app = express();
 
@@ -15,6 +18,11 @@ app.use(
     },
   }),
 );
+
+// ── Local demo mode static serving ───────────────────────────────
+if (isLocalMode()) {
+  app.use('/uploads', express.static(getUploadsDir()));
+}
 
 // ─────────────────────────────────────────────────────────────────
 //  Health check
@@ -32,7 +40,7 @@ app.post(
   async (req: Request & { rawBody?: Buffer }, res: Response): Promise<void> => {
     // ── 1. Verify signature ─────────────────────────────────────
     const secret = process.env.VERCEL_WEBHOOK_SECRET;
-    if (secret) {
+    if (secret && !isLocalMode()) {
       const signature = req.headers['x-vercel-signature'] as string | undefined;
       if (!signature || !req.rawBody) {
         res.status(401).json({ error: 'Missing signature' });
@@ -57,8 +65,11 @@ app.post(
     }
 
     const deployment = body.payload?.deployment;
-    const deploymentUrl: string = `https://${deployment?.url}`;
+    const urlStr = deployment?.url || '';
+    const protocol = urlStr.includes('localhost') || urlStr.includes('127.0.0.1') ? 'http' : 'https';
+    const deploymentUrl: string = `${protocol}://${urlStr}`;
     const vercelProjectId: string = body.payload?.projectId ?? '';
+    const snapdiffProjectId: string = body.payload?._snapdiffProjectId; // injected by trigger-run in local mode
     const commitSha: string | null = deployment?.meta?.githubCommitSha ?? null;
     const prNumber: number | null = deployment?.meta?.githubPrId
       ? parseInt(deployment.meta.githubPrId, 10)
@@ -67,12 +78,17 @@ app.post(
 
     console.log(`[webhook] Deployment succeeded: ${deploymentUrl} (project: ${vercelProjectId})`);
 
+    const db = isLocalMode() ? localDb : cloudSupabase;
+
     // ── 3. Find matching SnapDiff project ───────────────────────
-    const { data: project, error } = await supabase
-      .from('projects')
-      .select('*')
-      .eq('vercel_project_id', vercelProjectId)
-      .maybeSingle();
+    let query = db.from('projects').select('*');
+    if (isLocalMode() && snapdiffProjectId) {
+        query = query.eq('id', snapdiffProjectId);
+    } else {
+        query = query.eq('vercel_project_id', vercelProjectId);
+    }
+    
+    const { data: project, error } = await query.maybeSingle();
 
     if (error || !project) {
       console.warn(`[webhook] No project found for Vercel project ID: ${vercelProjectId}`);
@@ -81,7 +97,7 @@ app.post(
     }
 
     // ── 4. Create run record ────────────────────────────────────
-    const { data: run, error: runError } = await supabase
+    const { data: run, error: runError } = await db
       .from('runs')
       .insert({
         project_id: project.id,

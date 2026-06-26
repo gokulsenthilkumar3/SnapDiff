@@ -3,6 +3,9 @@ import { redirect, notFound } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, CheckCircle, XCircle, Clock, Camera, GitCommit } from 'lucide-react';
 import type { Run } from '@snapdiff/db';
+import { TriggerRunButton } from './TriggerRunButton';
+import { isLocalMode } from '@/lib/mode';
+
 
 function RunStatusBadge({ status }: { status: Run['status'] }) {
   const map: Record<Run['status'], string> = {
@@ -68,6 +71,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
             <p className="text-gray-400 text-sm ml-13">{project.github_repo}</p>
           </div>
         </div>
+
+        {/* Trigger run (local demo mode only) */}
+        {isLocalMode() && <TriggerRunButton projectId={id} />}
 
         {/* Runs list */}
         <div>
